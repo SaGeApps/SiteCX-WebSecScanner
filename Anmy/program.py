@@ -3,7 +3,7 @@
 """
 Created on Mon Jan 21 10:50:16 2019
 
-@author: karan
+@author: Karan, Anmy
 """
 import os
 import requests
