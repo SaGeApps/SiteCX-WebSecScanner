@@ -13,6 +13,8 @@ import requests
 #COMMON
 newLine="\n"
 http_var="http://"
+curl_header='curl -s -I '
+predir='..'
 
 #XMAS
 xmas_cmd_str1='nmap –sX –p-  -Pn '
@@ -24,7 +26,19 @@ XSSProtection_cmd_str1='curl -s -I '
 XSSProtection_cmd_str2='| grep X-XSS-Protection'
 XSSProtection_indicator_str1='X-XSS-Protection: 1; mode=block'
 
+#XFrameOptions
+XFrameOptions_cmd_str1='| grep X-Frame-Options'
+XFrameOptions_indicator_str1='SAMEORIGIN'
+XFrameOptions_indicator_str2='deny'
 
+#XContentTypeOptions
+XContentTypeOptions_cmd_str1='| grep X-Content-Type-Options'
+XContentTypeOptions_indicator_str1='nosniff'
+
+#cors
+cors_cmd_str1='/dependency/CORStest'
+cors_filename='outfile.cors'
+cors_cmd_str2=' ./corstest.py -q outfile.cors'
 
 
 def xmas(hostname):
@@ -40,23 +54,23 @@ def XSSProtection(hostname):
 
 def XFrameOptions(hostname):
     r = requests.head(http_var+hostname, allow_redirects=True)
-    d=os.popen('curl -s -I '+ r.url+'| grep X-Frame-Options').read()
-    XFrameOptions = ('SAMEORIGIN' in d or 'deny' in d)
+    d=os.popen(curl_header+ r.url+XFrameOptions_cmd_str1).read()
+    XFrameOptions = (XFrameOptions_indicator_str1 in d or XFrameOptions_indicator_str2 in d)
     return XFrameOptions
     
 def XContentTypeOptions(hostname):
     r = requests.head(http_var+hostname, allow_redirects=True)
-    d=os.popen('curl -s -I '+ r.url+'| grep X-Content-Type-Options').read()
-    XContentTypeOptions = ('nosniff' in d )
+    d=os.popen(curl_header+ r.url+XContentTypeOptions_cmd_str1).read()
+    XContentTypeOptions = (XContentTypeOptions_indicator_str1 in d )
     return XContentTypeOptions
 
 def cors(hostname):
     a=os.getcwd()
-    os.chdir(a+'/dependency/CORStest')
-    with open('outfile.cors', 'w') as outfile:
+    os.chdir(a+cors_cmd_str1)
+    with open(cors_filename, 'w') as outfile:
         outfile.write(hostname)
-    d=os.popen(' ./corstest.py -q outfile.cors').read()
-    os.chdir('..')
+    d=os.popen(cors_cmd_str2).read()
+    os.chdir(predir)
     return d
 
     
