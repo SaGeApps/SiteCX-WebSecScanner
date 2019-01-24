@@ -10,10 +10,16 @@ import requests
 
 ## Var declares
 
-xmas_cmd_str1='nmap –sX –p-  -Pn '
-xmas_cmd_str2='| grep open'
+#COMMON
 newLine="\n"
 http_var="http://"
+
+#XMAS
+xmas_cmd_str1='nmap –sX –p-  -Pn '
+xmas_cmd_str2='| grep open'
+
+
+#XSS
 XSSProtection_cmd_str1='curl -s -I '
 XSSProtection_cmd_str2='| grep X-XSS-Protection'
 XSSProtection_indicator_str1='X-XSS-Protection: 1; mode=block'
