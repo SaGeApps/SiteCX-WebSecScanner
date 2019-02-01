@@ -73,4 +73,13 @@ def cors(hostname):
     os.chdir(predir)
     return d
 
+def portScan(hostname):
+    d=os.popen("nmap -p 1-65535 "+hostname+"| grep open").read()
+    d= d[:-1].split(newLine)
+    return d
+
+def OSdetection(hostname):
+    d=os.popen("nmap "+hostname+" -A | grep -E '(ubuntu|win|linux|Mac)'").read()
+    return d
+
     
