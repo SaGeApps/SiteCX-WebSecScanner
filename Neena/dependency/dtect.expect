@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+set timeout 60
+
+spawn python d-tect.py
+
+expect "Select Option" {
+	send "8\r"
+	expect "e.g, site.com" { send "google.com\r" 
+		expect ""{ send "N\r"
+			expect "*?" { send "N\r"
+		expect "*?" { send "N\r"
+		expect "*?" { send "N\r"
+	expect "*?xit or launch*?"{
+		send "e\r" }}}}}}}
