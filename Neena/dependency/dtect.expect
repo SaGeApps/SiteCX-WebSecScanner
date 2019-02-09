@@ -2,7 +2,7 @@
 
 set timeout 60
 
-spawn python d-tect.py
+spawn python ./DTECT1/d-tect.py
 
 expect "Select Option" {
 	send "8\r"

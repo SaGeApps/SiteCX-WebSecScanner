@@ -32,7 +32,7 @@ portscan 		= 		"off"
 wpscan 			= 		"off"
 xssscanner		= 		"off"
 wpbackupscan	=		"off"
-sqliscanner		=		"off"
+sqliscanner		=		"on"
 # -- Swiches End --
 
 
@@ -92,7 +92,9 @@ def dtect():
 		try:
 			global page,splithost,ip
 			data = host#+'/'
+			print(data)
 			page = urllib.urlopen(data)
+			print("HERE")
 			source = page.read()
 			splithost = str(data.split("://")[1].split("/")[0])
 			ip = socket.gethostbyname(splithost)
@@ -501,7 +503,8 @@ def dtect():
 		page = urllib.urlopen(host)
 		url = page.geturl()
 		if page.geturl() != host:
-			option = raw_input("[i] "+boldgrey+"Host redirects to "+str(url)+reset+" \n    Set this as default Host? [Y/N]:\n    > ")
+			# option = raw_input("[i] "+boldgrey+"Host redirects to "+str(url)+reset+" \n    Set this as default Host? [Y/N]:\n    > ")
+			option = "n"
 			if option.lower() == "y":
 				host = page.geturl()
 				redirect = 1
@@ -519,20 +522,13 @@ def dtect():
 		wpbackupscan	=		"off"
 		sqliscanner		=		"off"
 		# -- Swiches Reset --
-		inp = raw_input("\n[+] [E]xit or launch [A]gain? (e/a)").lower()
-		if inp == 'a':
-			dtect()
-		elif inp == 'e':
-			exit()
-		else:
-			print("[!] Incorrect option selected")
-			again()
-
+		exit()
+		
 # -- Program Structure Start -- 
-	menu()
+	# menu()
 	try:
 		global host
-		host = raw_input("[+] Enter Domain \n    e.g, site.com\n    > ")
+		host = str(sys.argv[1])  
 		if 'https://' in host:
 			pass
 		elif 'http://' in host:
