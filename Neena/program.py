@@ -7,7 +7,8 @@ Created on Mon Jan 21 10:50:16 2019
 """
 import os
 import requests
-
+from selenium import webdriver 
+import re
 ## Var declares
 
 #COMMON
@@ -78,14 +79,32 @@ def SQLInjection(hostname):
     sqlnjection= (" vulnerable to Click Jacking" in d )
     return sqlnjection
 
-from selenium import webdriver 
-driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver') 
-driver.get("http://casperjs.org")
-d=int(driver.execute_script('return document.getElementsByTagName("a").length;'))
-for i in range(d):
-    performance_data = driver.execute_script('return (document.getElementsByTagName("a")['+str(i)+'].href);') 
-    print (performance_data)
+def borkenACL(hostname):
+    arr=[]
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver',chrome_options=chrome_options)
+    driver.get("http://"+hostname)
+    d=int(driver.execute_script('return document.getElementsByTagName("a").length;'))
+    for i in range(d):
+        performance_data = driver.execute_script('return (document.getElementsByTagName("a")['+str(i)+'].href);') 
+        if "//"+hostname in performance_data:
+            arr.append(re.findall('^[^?]*', performance_data)[0])
+        elif "//www."+hostname in performance_data:
+            arr.append(re.findall('^[^?]*', performance_data)[0])
+        else:
+            pass
+    a=countlong(arr)
 
+    return arr[a]
+
+def countlong(arr):
+    a=[]
+    for i in arr:
+       a.append(i.count("/")) 
+    val=a.index(max(a))
+    return val
     
 
     
