@@ -81,8 +81,11 @@ def SQLInjection(hostname):
 from selenium import webdriver 
 driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver') 
 driver.get("http://casperjs.org")
-performance_data = driver.execute_script('return for(count = 0; count < document.getElementsByTagName("a").length; count++) {print(document.getElementsByTagName("a")[count].href);};') 
-print (performance_data)
+d=int(driver.execute_script('return document.getElementsByTagName("a").length;'))
+for i in range(d):
+    performance_data = driver.execute_script('return (document.getElementsByTagName("a")['+str(i)+'].href);') 
+    print (performance_data)
+
     
 
     
