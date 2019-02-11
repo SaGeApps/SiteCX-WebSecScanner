@@ -73,4 +73,16 @@ def cors(hostname):
     os.chdir(predir)
     return d
 
+def SQLInjection(hostname):
+    d=os.popen('python2 ./dependency/DTECT1/d-tect.py '+hostname+' |grep "Click Jacking"').read()
+    sqlnjection= (" vulnerable to Click Jacking" in d )
+    return sqlnjection
+
+from selenium import webdriver 
+driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver') 
+driver.get("http://casperjs.org")
+performance_data = driver.execute_script('return for(count = 0; count < document.getElementsByTagName("a").length; count++) {print(document.getElementsByTagName("a")[count].href);};') 
+print (performance_data)
+    
+
     
