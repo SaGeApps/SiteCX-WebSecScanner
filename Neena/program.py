@@ -10,6 +10,7 @@ import requests
 from selenium import webdriver 
 import re
 import urllib.request
+import dns.resolver
 ## Var declares
 
 #COMMON
@@ -115,4 +116,11 @@ def req(d):
     d=urllib.request.urlopen(d[::-1]).getcode()
     return d
 
+def ArecordRedirection(hostname):
+    txt = dns.resolver.query(hostname, 'A')
+    s=str(txt.response.answer[0].to_text)
+    s=s.replace("<bound method RRset.to_text of <DNS ","").replace(". IN A RRset>>","")
+    ArecordRedirection = (hostname != s)
+    return ArecordRedirection
+     
     
