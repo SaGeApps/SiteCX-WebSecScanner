@@ -9,6 +9,7 @@ import os
 import requests
 from selenium import webdriver 
 import re
+import urllib.request
 ## Var declares
 
 #COMMON
@@ -96,8 +97,8 @@ def borkenACL(hostname):
         else:
             pass
     a=countlong(arr)
-
-    return arr[a]
+    a=req(arr[a])
+    return a
 
 def countlong(arr):
     a=[]
@@ -105,6 +106,13 @@ def countlong(arr):
        a.append(i.count("/")) 
     val=a.index(max(a))
     return val
-    
+
+def req(d):
+    print(d)
+    d=d[:-1][::-1]
+    d=d.replace(d[:d.find("/")],'..')
+    print(d[::-1])
+    d=urllib.request.urlopen(d[::-1]).getcode()
+    return d
 
     
