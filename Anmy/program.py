@@ -82,4 +82,7 @@ def OSdetection(hostname):
     d=os.popen("nmap "+hostname+" -A | grep -E '(ubuntu|win|linux|Mac)'").read()
     return d
 
+def dnsspoof(hostname):
+    d=os.popen("dnsspoof -i eth0 -f "+hostname)
+    return d
     
