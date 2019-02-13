@@ -17,7 +17,7 @@ import dns.resolver
 newLine="\n"
 http_var="http://"
 curl_header='curl -s -I '
-predir='..'
+predir='../..'
 
 #XMAS
 xmas_cmd_str1='nmap –sX –p-  -Pn '
@@ -70,9 +70,17 @@ def XContentTypeOptions(hostname):
 def cors(hostname):
     a=os.getcwd()
     os.chdir(a+cors_cmd_str1)
+    try:
+        os.remove(cors_filename)
+    except OSError:
+        pass
     with open(cors_filename, 'w') as outfile:
         outfile.write(hostname)
     d=os.popen(cors_cmd_str2).read()
+    try:
+        os.remove(cors_filename)
+    except OSError:
+        pass
     os.chdir(predir)
     return d
 
