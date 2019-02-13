@@ -85,4 +85,10 @@ def OSdetection(hostname):
 def dnsspoof(hostname):
     d=os.popen("dnsspoof -i eth0 -f "+hostname)
     return d
-    
+def EmailHijacking(hostname):
+    a=os.getcwd()
+    os.chdir(a+"/dependency/spoofcheck")
+    d=os.popen("./spoofcheck.py "+hostname)
+    os.chdir("../..")
+    return d
+
