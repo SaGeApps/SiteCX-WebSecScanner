@@ -122,5 +122,13 @@ def ArecordRedirection(hostname):
     s=s.replace("<bound method RRset.to_text of <DNS ","").replace(". IN A RRset>>","")
     ArecordRedirection = (hostname != s)
     return ArecordRedirection
+
+def blindjacking(hostname):
+    a=os.getcwd()
+    os.chdir(a+"/dependency/findject/")
+    d=os.popen("tshark -i  eth0 -F pcap -w test.pcap").read()
+    d=os.popen("python findject.py test.pcap")
+    return d
+    
      
     
