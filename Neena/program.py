@@ -203,15 +203,7 @@ def Main(hostname):
     return str(json_data).replace("\'", "\"")
         
 
-
-
-
-
-
-
-
-
-     
 if __name__ == "__main__":
     app.run(host='192.168.35.33',port=7444)
      
+
