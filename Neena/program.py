@@ -24,6 +24,7 @@ CORS(app)
 #COMMON
 newLine="\n"
 http_var="http://"
+https_var="https://"
 curl_header='curl -s -I '
 predir='../..'
 
@@ -181,6 +182,16 @@ def blindjacking(hostname):
         print(str(e)+"blindjacking")
         d=""
     return d
+
+def checkcaptcha(hostname):
+    try:
+        r = requests.head(http_var+hostname, allow_redirects=True)
+    except ConnectionError:
+        r = requests.head(https_var+hostname, allow_redirects=True)
+        
+    d=os.popen("curl -s "+r.url+" |grep alt=").read()
+    checkcaptcha = ("captcha" in d)
+    return checkcaptcha
 
 @app.route('/main/<hostname>', methods=['GET'])    
 def Main(hostname):
