@@ -5,6 +5,13 @@ Created on Mon Jan 21 10:50:16 2019
 
 @author: Karan, Neena
 """
+from bs4 import BeautifulSoup
+
+
+
+
+
+
 import os
 import requests
 from selenium import webdriver 
@@ -127,39 +134,47 @@ def SQLInjection(hostname):
     return sqlnjection
 
 def borkenACL(hostname):
-    arr=[]
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver',chrome_options=chrome_options)
-    driver.get("http://"+hostname)
-    d=int(driver.execute_script('return document.getElementsByTagName("a").length;'))
-    for i in range(d):
-        performance_data = driver.execute_script('return (document.getElementsByTagName("a")['+str(i)+'].href);') 
-        if "//"+hostname in performance_data:
-            arr.append(re.findall('^[^?]*', performance_data)[0])
-        elif "//www."+hostname in performance_data:
-            arr.append(re.findall('^[^?]*', performance_data)[0])
-        else:
-            pass
-    a=countlong(arr)
-    a=req(arr[a])
-    return a
-
-def countlong(arr):
-    a=[]
-    for i in arr:
-       a.append(i.count("/")) 
-    val=a.index(max(a))
-    return val
-
-def req(d):
-    print(d)
-    d=d[:-1][::-1]
-    d=d.replace(d[:d.find("/")],'..')
-    print(d[::-1])
-    d=urllib.request.urlopen(d[::-1]).getcode()
-    return d
+    try:
+        status=[]
+        arr=[]
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver',chrome_options=chrome_options)
+        driver.get("http://"+hostname)
+        d=int(driver.execute_script('return document.getElementsByTagName("a").length;'))
+        for i in range(d):
+            performance_data = driver.execute_script('return (document.getElementsByTagName("a")['+str(i)+'].href);') 
+            if "//"+hostname in performance_data:
+                arr.append(re.findall('^[^?]*', performance_data)[0])
+            elif "//www."+hostname in performance_data:
+                arr.append(re.findall('^[^?]*', performance_data)[0])
+            else:
+                pass
+        a=[]
+        for i in arr:
+           a.append(i.count("/")) 
+        val=a.index(max(a))
+        f=arr[val]
+        while(f.count("/") >=2):
+            f=f[:-1][::-1]
+            f=f.replace(f[:f.find("/")],'')
+            try:
+                page = urllib.request.urlopen(f[::-1])
+                html = BeautifulSoup(page.read(),"html.parser")
+                status.append(("Index of" in html.title.string))
+            except Exception as e: 
+                if "HTTP Error" in str(e):
+                    status.append(False)
+                else:
+                    status.append("")
+            f=f.replace(f[:f.find("/")],'')
+    except :
+        status.append("")
+    driver.close()
+    driver.quit()
+    borkenACL = ("True" in status)
+    return borkenACL
 
 def ArecordRedirection(hostname):
     try:
