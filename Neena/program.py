@@ -55,9 +55,43 @@ XContentTypeOptions_cmd_str1='| grep X-Content-Type-Options'
 XContentTypeOptions_indicator_str1='nosniff'
 
 #cors
-cors_cmd_str1='/dependency/CORStest'
+cors_cmd_str1='/dependency/CORStest/'
 cors_filename='outfile.cors'
-cors_cmd_str2=' ./corstest.py -q outfile.cors'
+cors_cmd_str2='python2 corstest.py -q outfile.cors'
+
+def calcXmas(hostname):
+    d=xmas(hostname)
+    score=10 - len(d)
+    return score
+    
+def calcauthentication(hostname):
+    score = 10 - int(not XFrameOptions(hostname)) - int(not XContentTypeOptions(hostname)) -int(not XSSProtection(hostname)) - int(not checkcaptcha(hostname))
+    return score
+
+def calcborkenACL(hostname):
+    score = int(not borkenACL(hostname))
+    return score
+
+def calcSQLInjection(hostname):
+    score = int(not SQLInjection(hostname))
+    return score
+
+def calcArecordRedirection(hostname):
+    score = int(not ArecordRedirection(hostname))
+    return score
+
+def calccors(hostname):
+    d=cors(hostname)
+    if d == '':
+        score = 10
+    elif "Alert:" in d:
+        score = 0
+    elif "Warning:" in d:
+        score = 5
+    else:
+        score = 7
+    return score
+
 
 
 def xmas(hostname):
@@ -99,6 +133,16 @@ def XContentTypeOptions(hostname):
         XContentTypeOptions=False
     return XContentTypeOptions
 
+def xsspy(hostname):
+    try:
+        a=os.getcwd()
+        os.chdir(a+"/dependency/XssPy")
+        d=os.popen("python2 XssPy.py "+hostname).read()
+    except Exception as e:
+        print(str(e)+"XContentTypeOptions")
+        xsspy=''
+    return xsspy
+    
 def cors(hostname):
     try:
         a=os.getcwd()
@@ -116,7 +160,7 @@ def cors(hostname):
             pass
         os.chdir(predir)
     except Exception as e:
-        print(str(e)+"XContentTypeOptions")
+        print(str(e)+"cors")
         d=""
         try:
             os.remove(cors_filename)
@@ -192,7 +236,7 @@ def blindjacking(hostname):
         a=os.getcwd()
         os.chdir(a+"/dependency/findject/")
         d=os.popen("tshark -i  eth0 -F pcap -w test.pcap").read()
-        d=os.popen("python findject.py test.pcap")
+        d=os.popen("python findject.py test.pcap").read()
     except Exception as e:
         print(str(e)+"blindjacking")
         d=""
