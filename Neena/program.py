@@ -59,6 +59,26 @@ cors_cmd_str1='/dependency/CORStest/'
 cors_filename='outfile.cors'
 cors_cmd_str2='python2 corstest.py -q outfile.cors'
 
+@app.route('/main/<hostname>', methods=['GET'])    
+def Main(hostname):
+    try:
+        json_data = {}
+        json_data["domain"]=hostname
+        json_data["xmas"]=calcXmas(hostname)
+        json_data["Bad_authentication"]=calcauthentication(hostname)
+        json_data["borkenACL"]=calcborkenACL(hostname)
+        json_data["cors"]=calccors(hostname)
+        json_data["Sessionhijack"]=calcSessionhijack(hostname)
+        json_data["ArecordRedirection"]=calcArecordRedirection(hostname)
+        json_data["SQLInjection"]=calcSQLInjection(hostname)
+        
+    except Exception as e:
+        print(str(e)+"main")
+        json_data = {}
+        json_data["domain"]=hostname
+    return str(json_data).replace("\'", "\"")
+
+
 def calcXmas(hostname):
     d=xmas(hostname)
     score=10 - len(d)
@@ -92,6 +112,13 @@ def calccors(hostname):
         score = 7
     return score
 
+def calcSessionhijack(hostname):
+    d= blindjacking(hostname)
+    if d == "":
+        score = 1
+    else:
+        score = 0
+    return score
 
 
 def xmas(hostname):
@@ -252,25 +279,7 @@ def checkcaptcha(hostname):
     checkcaptcha = ("captcha" in d)
     return checkcaptcha
 
-@app.route('/main/<hostname>', methods=['GET'])    
-def Main(hostname):
-    try:
-        json_data = {}
-        json_data["domain"]=hostname
-        json_data["xmas"]=xmas(hostname)
-        json_data["XSSProtection"]=XSSProtection(hostname)
-        json_data["XFrameOptions"]=XFrameOptions(hostname)
-        json_data["XContentTypeOptions"]=XContentTypeOptions(hostname)
-        json_data["cors"]=cors(hostname)
-        json_data["blindjacking"]=blindjacking(hostname)
-        json_data["ArecordRedirection"]=ArecordRedirection(hostname)
-        json_data["SQLInjection"]=SQLInjection(hostname)
-        
-    except Exception as e:
-        print(str(e)+"main")
-        json_data = {}
-        json_data["domain"]=hostname
-    return str(json_data).replace("\'", "\"")
+
         
 
 if __name__ == "__main__":
