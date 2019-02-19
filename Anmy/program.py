@@ -83,7 +83,7 @@ def OSdetection(hostname):
     return d
 
 def dnsspoof(hostname):
-    d=os.popen("dnsspoof -i eth0 -f "+hostname)
+    d=os.popen("dnsspoof -i eth0 -f "+hostname).read()
     return d
 def EmailHijacking(hostname):
     a=os.getcwd()
