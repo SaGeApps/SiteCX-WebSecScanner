@@ -6,19 +6,13 @@ Created on Mon Jan 21 10:50:16 2019
 @author: Karan, Neena
 """
 from bs4 import BeautifulSoup
-
-
-
-
-
-
 import os
 import requests
 from selenium import webdriver 
 import re
 import urllib.request
 import dns.resolver
-from flask import Flask
+from flask import Flask ,render_template
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -59,7 +53,19 @@ cors_cmd_str1='/dependency/CORStest/'
 cors_filename='outfile.cors'
 cors_cmd_str2='python2 corstest.py -q outfile.cors'
 
-@app.route('/main/<hostname>', methods=['GET'])    
+@app.route('/<hostname>', methods=['GET'])  
+def index(hostname):
+    data=Main(hostname)
+    print(data)
+    dm = str(data["domain"])
+    sq = str(data["SQLInjection"])
+    xmas = str(data["xmas"])
+    borkenACL = str(data["borkenACL"])
+    ArecordRedirection = str(data["ArecordRedirection"])
+    cors = str(data["cors"])
+    return render_template('index.html',Domain = dm,sqlinjection = sq ,xmas = xmas , borkenACL = borkenACL ,ArecordRedirection = ArecordRedirection ,cors = cors)
+
+
 def Main(hostname):
     try:
         json_data = {}
@@ -76,7 +82,7 @@ def Main(hostname):
         print(str(e)+"main")
         json_data = {}
         json_data["domain"]=hostname
-    return str(json_data).replace("\'", "\"")
+    return json_data
 
 
 def calcXmas(hostname):
