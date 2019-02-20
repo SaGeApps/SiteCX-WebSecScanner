@@ -56,14 +56,16 @@ cors_cmd_str2='python2 corstest.py -q outfile.cors'
 @app.route('/<hostname>', methods=['GET'])  
 def index(hostname):
     data=Main(hostname)
-    print(data)
-    dm = str(data["domain"])
-    sq = str(data["SQLInjection"])
-    xmas = str(data["xmas"])
-    borkenACL = str(data["borkenACL"])
-    ArecordRedirection = str(data["ArecordRedirection"])
-    cors = str(data["cors"])
-    return render_template('index.html',Domain = dm,sqlinjection = sq ,xmas = xmas , borkenACL = borkenACL ,ArecordRedirection = ArecordRedirection ,cors = cors)
+    dm = data["domain"]
+    sq = data["SQLInjection"]
+    xmas = data["xmas"]
+    borkenACL = data["borkenACL"]
+    ArecordRedirection = data["ArecordRedirection"]
+    cors = data["cors"]
+    bad = data["Bad_authentication"]
+    session = data["Sessionhijack"]
+     
+    return render_template('index.html',Domain = dm,sqlinjection = sq ,xmas = xmas , borkenACL = borkenACL ,ArecordRedirection = ArecordRedirection ,cors = cors,Bad_authentication = bad,Sessionhijack = session)
 
 
 def Main(hostname):
