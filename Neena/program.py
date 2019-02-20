@@ -89,44 +89,65 @@ def Main(hostname):
 
 
 def calcXmas(hostname):
-    d=xmas(hostname)
-    score=10 - len(d)
+    try:
+        d=xmas(hostname)
+        score=10 - len(d)
+    except:
+        score = ""
     return str(score)
     
 def calcauthentication(hostname):
-    score = 10 - int(not XFrameOptions(hostname)) - int(not XContentTypeOptions(hostname)) -int(not XSSProtection(hostname)) - int(not checkcaptcha(hostname))
+    try:
+        score = 10 - int(not XFrameOptions(hostname)) - int(not XContentTypeOptions(hostname)) -int(not XSSProtection(hostname)) - int(not checkcaptcha(hostname))
+    except:
+        score = ""
     return str(score)
 
 def calcborkenACL(hostname):
-    score = int(not borkenACL(hostname))
+    try:
+        score = int(not borkenACL(hostname))
+    except:
+        score = ""
     return str(score)
 
 def calcSQLInjection(hostname):
-    score = int(not SQLInjection(hostname))
+    try:
+        score = int(not SQLInjection(hostname))
+    except:
+        score = ""
     return str(score)
 
 def calcArecordRedirection(hostname):
-    score = int(not ArecordRedirection(hostname))
+    try:
+        score = int(not ArecordRedirection(hostname))
+    except:
+        score = ""
     return str(score)
 
 def calccors(hostname):
-    d=cors(hostname)
-    if d == '':
-        score = 10
-    elif "Alert:" in d:
-        score = 0
-    elif "Warning:" in d:
-        score = 5
-    else:
-        score = 7
+    try:
+        d=cors(hostname)
+        if d == '':
+            score = 10
+        elif "Alert:" in d:
+            score = 0
+        elif "Warning:" in d:
+            score = 5
+        else:
+            score = 7
+    except:
+        score = ""    
     return str(score)
 
 def calcSessionhijack(hostname):
-    d= blindjacking(hostname)
-    if d == "":
-        score = 1
-    else:
-        score = 0
+    try:
+        d= blindjacking(hostname)
+        if d == "":
+            score = 1
+        else:
+            score = 0
+    except:
+        score = ""            
     return str(score)
 
 
@@ -136,7 +157,7 @@ def xmas(hostname):
         d= d[:-1].split(newLine)
     except Exception as e:
         print(str(e)+"xmas")
-        d=""
+        d=[]
     return d
 
 def XSSProtection(hostname):
@@ -210,7 +231,7 @@ def SQLInjection(hostname):
         sqlnjection= ("vulnerable to Click Jacking" in d )
     except Exception as e:
         print(str(e)+"sqlnjection")
-        sqlnjection=""
+        sqlnjection=False
     return sqlnjection
 
 def borkenACL(hostname):
