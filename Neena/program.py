@@ -58,27 +58,28 @@ def index(hostname):
     data=Main(hostname)
     dm = data["domain"]
     sq = data["SQLInjection"]
-    xmas = data["xmas"]
-    borkenACL = data["borkenACL"]
-    ArecordRedirection = data["ArecordRedirection"]
-    cors = data["cors"]
+    x = data["xmas"]
+    acl = data["borkenACL"]
+    ar = data["ArecordRedirection"]
+    c = data["cors"]
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
      
-    return render_template('index.html',Domain = dm,sqlinjection = sq ,xmas = xmas , borkenACL = borkenACL ,ArecordRedirection = ArecordRedirection ,cors = cors,Bad_authentication = bad,Sessionhijack = session)
+    return render_template('index.html',Domain = dm, sqlinjection = sq ,xmas = x , borkenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
 
 
 def Main(hostname):
     try:
         json_data = {}
         json_data["domain"]=hostname
+        json_data["SQLInjection"]=calcSQLInjection(hostname)
         json_data["xmas"]=calcXmas(hostname)
         json_data["Bad_authentication"]=calcauthentication(hostname)
         json_data["borkenACL"]=calcborkenACL(hostname)
         json_data["cors"]=calccors(hostname)
         json_data["Sessionhijack"]=calcSessionhijack(hostname)
         json_data["ArecordRedirection"]=calcArecordRedirection(hostname)
-        json_data["SQLInjection"]=calcSQLInjection(hostname)
+        
         
     except Exception as e:
         print(str(e)+"main")
@@ -90,23 +91,23 @@ def Main(hostname):
 def calcXmas(hostname):
     d=xmas(hostname)
     score=10 - len(d)
-    return score
+    return str(score)
     
 def calcauthentication(hostname):
     score = 10 - int(not XFrameOptions(hostname)) - int(not XContentTypeOptions(hostname)) -int(not XSSProtection(hostname)) - int(not checkcaptcha(hostname))
-    return score
+    return str(score)
 
 def calcborkenACL(hostname):
     score = int(not borkenACL(hostname))
-    return score
+    return str(score)
 
 def calcSQLInjection(hostname):
     score = int(not SQLInjection(hostname))
-    return score
+    return str(score)
 
 def calcArecordRedirection(hostname):
     score = int(not ArecordRedirection(hostname))
-    return score
+    return str(score)
 
 def calccors(hostname):
     d=cors(hostname)
@@ -118,7 +119,7 @@ def calccors(hostname):
         score = 5
     else:
         score = 7
-    return score
+    return str(score)
 
 def calcSessionhijack(hostname):
     d= blindjacking(hostname)
@@ -126,7 +127,7 @@ def calcSessionhijack(hostname):
         score = 1
     else:
         score = 0
-    return score
+    return str(score)
 
 
 def xmas(hostname):
@@ -206,10 +207,10 @@ def cors(hostname):
 def SQLInjection(hostname):
     try:
         d=os.popen('python2 ./dependency/DTECT1/d-tect.py '+hostname+' |grep "Click Jacking"').read()
-        sqlnjection= (" vulnerable to Click Jacking" in d )
+        sqlnjection= ("vulnerable to Click Jacking" in d )
     except Exception as e:
         print(str(e)+"sqlnjection")
-        sqlnjection=False
+        sqlnjection=""
     return sqlnjection
 
 def borkenACL(hostname):
