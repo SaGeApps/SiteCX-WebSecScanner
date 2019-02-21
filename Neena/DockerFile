@@ -1,4 +1,4 @@
-FROM brimstone/kali
+FROM ubuntu:16.04
 
 #LABEL MAINTAINER Michael Laccetti <michael@laccetti.com> <https://laccetti.com/)
 
@@ -9,9 +9,9 @@ RUN apt-get update  && \
 
 
 
-COPY ./requirements.txt /opt/DomainMonitor/requirements.txt
+COPY ./requirements.txt /opt/WebSecurity/requirements.txt
 
-WORKDIR /opt/DomainMonitor
+WORKDIR /opt/WebSecurity
 
 
 RUN pip3 install -r requirements.txt
@@ -20,8 +20,8 @@ RUN pip3 install -r requirements.txt
 
 
 
-COPY . /opt/Web Security
+COPY * /opt/WebSecurity/
+RUN ls
 EXPOSE 7444
-ENTRYPOINT [ "python3" ]
 
-CMD [ "program.py" ]
+CMD [ "python3 program.py" ]
