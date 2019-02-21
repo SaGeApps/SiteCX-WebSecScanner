@@ -1,27 +1,38 @@
 FROM ubuntu:16.04
 
-#LABEL MAINTAINER Michael Laccetti <michael@laccetti.com> <https://laccetti.com/)
-
-
-
-RUN apt-get update  && \
-        apt-get install -y python3-pip
-
-
-
-COPY ./requirements.txt /opt/WebSecurity/requirements.txt
-
-WORKDIR /opt/WebSecurity
-
-
-RUN pip3 install -r requirements.txt
+RUN	sudo apt-get update 
+RUN	sudo apt-get install python3-pip
+RUN	sudo apt-get install -y python3-setuptools
+RUN	sudo apt-get install git
+RUN	git clone https://github.com/SaGeApps/SiteCX-WebSecScanner.git
+RUN	cd SiteCX-WebSecScanner/
+RUN	git checkout feature/Neena_CodeUpdations
+RUN	git pull
+RUN	cd Neena/
+RUN	pip3 install -r requirements.txt 
+RUN	python3 program.py 
 
 
 
 
 
-COPY * /opt/WebSecurity/
-RUN ls
-EXPOSE 7444
 
-CMD [ "python3 program.py" ]
+
+
+
+
+
+
+
+
+
+#### OLD
+#RUN apt-get update  && \
+#        apt-get install -y python3-pip
+#COPY ./requirements.txt /opt/WebSecurity/requirements.txt
+#WORKDIR /opt/WebSecurity
+#RUN pip3 install -r requirements.txt
+#COPY * /opt/WebSecurity/
+#RUN ls
+#EXPOSE 7444
+#CMD [ "python3 program.py" ]
