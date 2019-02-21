@@ -223,7 +223,10 @@ def cors(hostname):
             os.remove(cors_filename)
         except OSError:
             pass
-        os.chdir(predir)
+        if (cors_cmd_str1 in os.getcwd()):
+            os.chdir(predir)
+        else:
+            pass
     return d
 
 def SQLInjection(hostname):
@@ -299,6 +302,7 @@ def blindjacking(hostname):
         os.chdir(predir)
     except Exception as e:
         print(str(e)+"blindjacking")
+        os.chdir(predir)
         d=""
     return d
 
