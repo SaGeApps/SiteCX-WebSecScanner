@@ -223,15 +223,17 @@ def cors(hostname):
             os.remove(cors_filename)
         except OSError:
             pass
+        os.chdir(predir)
     return d
 
 def SQLInjection(hostname):
     try:
         d=os.popen('python2 ./dependency/DTECT1/d-tect.py '+hostname+' |grep "Click Jacking"').read()
-        sqlnjection= ("vulnerable to Click Jacking" in d )
+        sqlnjection= ("Click Jacking" in d )
     except Exception as e:
         print(str(e)+"sqlnjection")
         sqlnjection=False
+        print("asd")
     return sqlnjection
 
 def borkenACL(hostname):
@@ -294,6 +296,7 @@ def blindjacking(hostname):
         os.chdir(a+"/dependency/findject/")
         d=os.popen("tshark -i  eth0 -F pcap -w test.pcap").read()
         d=os.popen("python findject.py test.pcap").read()
+        os.chdir(predir)
     except Exception as e:
         print(str(e)+"blindjacking")
         d=""
