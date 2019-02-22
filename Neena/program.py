@@ -246,7 +246,7 @@ def borkenACL(hostname):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
-        driver=webdriver.Chrome(executable_path=r'/usr/local/bin/chromedriver',chrome_options=chrome_options)
+        driver=webdriver.Chrome(executable_path=r'/dependency/Drivers',chrome_options=chrome_options)
         driver.get("http://"+hostname)
         d=int(driver.execute_script('return document.getElementsByTagName("a").length;'))
         for i in range(d):
