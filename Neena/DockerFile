@@ -4,6 +4,23 @@ RUN apt-get update
 RUN apt-get install -y curl
 RUN apt-get install -y nmap
 RUN apt-get install -y git python3-pip python3-setuptools
+#RUN apt-get install google-chrome-stable -y
+
+RUN apt-get -yqq update && \
+    apt-get -yqq install curl unzip && \
+    apt-get -yqq install xvfb tinywm
+
+# Install chromedriver for Selenium
+
+RUN CHROMEDRIVER_VERSION="2.46" && \
+    mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION && \
+    curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && \
+    unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION && \
+    rm /tmp/chromedriver_linux64.zip && \
+    chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver && \
+    ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/local/bin/chromedriver 
+ 
+
 RUN git clone https://github.com/SaGeApps/SiteCX-WebSecScanner.git
 WORKDIR SiteCX-WebSecScanner/
 RUN pwd
