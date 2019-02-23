@@ -275,7 +275,8 @@ def borkenACL(hostname):
                 else:
                     status.append("")
             f=f.replace(f[:f.find("/")],'')
-    except :
+    except Exception as e:
+        print("------------/nborkenACL--------"+str(e))
         status.append("")
     driver.close()
     driver.quit()
