@@ -91,8 +91,10 @@ def Main(hostname):
 def calcXmas(hostname):
     try:
         d=xmas(hostname)
-        print("here")
         score=10 - len(d)
+        print("here")
+        print(str(score))
+        print(len(d))
     except:
         score = ""
     return str(score)
@@ -159,7 +161,6 @@ def xmas(hostname):
     except Exception as e:
         print(str(e)+"xmas")
         d=[]
-    print("here")
     return d
 
 def XSSProtection(hostname):
