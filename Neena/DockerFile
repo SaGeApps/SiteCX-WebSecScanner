@@ -3,7 +3,10 @@ FROM ubuntu:16.04
 RUN apt-get update 
 RUN apt-get install -y git python3-pip python3-setuptools xvfb curl nmap unzip
 
-
+RUN cd ~
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+RUN tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz 
+RUN cp wkhtmltox/bin/wk* /usr/local/bin/
 
 
 #chrome

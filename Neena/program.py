@@ -12,8 +12,10 @@ from selenium import webdriver
 import re
 import urllib.request
 import dns.resolver
-from flask import Flask ,render_template
+from flask import Flask ,render_template , make_response
 from flask_cors import CORS
+import pdfkit
+import base64
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -53,6 +55,12 @@ cors_cmd_str1='/dependency/CORStest/'
 cors_filename='outfile.cors'
 cors_cmd_str2='python2 corstest.py -q outfile.cors'
 
+
+def get_image_file_as_base64_data():
+    encoded = base64.b64encode(open("static/logo_s.png", "rb").read())
+    return encoded
+    
+    
 @app.route('/<hostname>', methods=['GET'])  
 def index(hostname):
     data=Main(hostname)
@@ -64,8 +72,14 @@ def index(hostname):
     c = data["cors"]
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
-     
-    return render_template('index.html',Domain = dm, sqlinjection = sq ,xmas = x , borkenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
+    render = render_template('index.html',img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , borkenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    pdf = pdfkit.from_string(render,False)
+    
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline; filename =output.pdf'
+    return response
 
 
 def Main(hostname):
@@ -154,9 +168,7 @@ def calcSessionhijack(hostname):
 def xmas(hostname):
     try:
         d=os.popen(xmas_cmd_str1+ hostname+xmas_cmd_str2).read()
-        print("1")
         d= d[:-1].split(newLine)
-        print("2")
     except Exception as e:
         print(str(e)+"xmas")
         d=[]
