@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y git python3-pip python3-setuptools xvfb curl nmap
 
 
-CMD ["git clone https://github.com/SaGeApps/SiteCX-WebSecScanner.git"]
+RUN git clone https://github.com/SaGeApps/SiteCX-WebSecScanner.git
 WORKDIR SiteCX-WebSecScanner/
 ### RUN pwd
 RUN git checkout feature/Neena_CodeUpdations
