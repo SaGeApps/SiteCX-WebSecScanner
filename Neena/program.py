@@ -92,9 +92,6 @@ def calcXmas(hostname):
     try:
         d=xmas(hostname)
         score=10 - len(d)
-        print("here")
-        print(str(score))
-        print(len(d))
     except:
         score = ""
     return str(score)
@@ -157,7 +154,9 @@ def calcSessionhijack(hostname):
 def xmas(hostname):
     try:
         d=os.popen(xmas_cmd_str1+ hostname+xmas_cmd_str2).read()
+        print("1")
         d= d[:-1].split(newLine)
+        print("2")
     except Exception as e:
         print(str(e)+"xmas")
         d=[]
