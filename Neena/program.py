@@ -158,6 +158,7 @@ def xmas(hostname):
     except Exception as e:
         print(str(e)+"xmas")
         d=[]
+    print("here")
     return d
 
 def XSSProtection(hostname):
