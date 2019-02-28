@@ -6,8 +6,8 @@ Created on Mon Jan 21 10:50:16 2019
 @author: Karan, Anmy
 """
 import os
-import requests
-
+import json
+from dependency.ssltest import sslcheck
 
 
 def portScan(hostname):
@@ -28,4 +28,27 @@ def EmailHijacking(hostname):
     d=os.popen("./spoofcheck.py "+hostname)
     os.chdir("../..")
     return d
-
+def MITM(hostname):  
+    d = sslcheck.TLS(hostname)    
+    if d["SSLv3"] == 'False':
+        tscore = 3
+    else:
+        tscore = 0
+    if sslcheck.isInsecureSignatureAlgorithm(hostname) == 'False':
+        sscore = 2
+    else:
+        sscore = 0
+    if int(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
+        dscore = 5
+    else:
+        dscore = 0
+        sscore = 0
+        tscore = 0
+    score = sscore + tscore + dscore
+    return score
+    
+        
+        
+        
+        
+        
