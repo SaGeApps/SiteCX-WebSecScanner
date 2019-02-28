@@ -67,13 +67,13 @@ def index(hostname):
     dm = data["domain"]
     sq = data["SQLInjection"]
     x = data["xmas"]
-    acl = data["borkenACL"]
+    acl = data["brokenACL"]
     ar = data["ArecordRedirection"]
     c = data["cors"]
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
-    render = render_template('index.html',img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , borkenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    render = render_template('index.html',img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
     pdf = pdfkit.from_string(render,False)
     
     response = make_response(pdf)
@@ -86,13 +86,13 @@ def Main(hostname):
     try:
         json_data = {}
         json_data["domain"]=hostname
-        json_data["SQLInjection"]=calcSQLInjection(hostname)
+        json_data["SQLInjection"]=calc_SQLInjection(hostname)
         json_data["xmas"]=calcXmas(hostname)
-        json_data["Bad_authentication"]=calcauthentication(hostname)
-        json_data["borkenACL"]=calcborkenACL(hostname)
-        json_data["cors"]=calccors(hostname)
-        json_data["Sessionhijack"]=calcSessionhijack(hostname)
-        json_data["ArecordRedirection"]=calcArecordRedirection(hostname)
+        json_data["Bad_authentication"]=calc_Authentication(hostname)
+        json_data["brokenACL"]=calc_BrokenACL(hostname)
+        json_data["cors"]=calc_CORS(hostname)
+        json_data["Sessionhijack"]=calc_SessionHijack(hostname)
+        json_data["ArecordRedirection"]=calc_A_RecordRedirection(hostname)
         
         
     except Exception as e:
@@ -110,35 +110,35 @@ def calcXmas(hostname):
         score = ""
     return str(score)
     
-def calcauthentication(hostname):
+def calc_Authentication(hostname):
     try:
-        score = 10 - int(not XFrameOptions(hostname)) - int(not XContentTypeOptions(hostname)) -int(not XSSProtection(hostname)) - int(not checkcaptcha(hostname))
+        score = 10 - int(not XFrameOptions(hostname)) - int(not XContentTypeOptions(hostname)) -int(not XSSProtection(hostname)) - int(not checkCaptcha(hostname))
     except:
         score = ""
     return str(score)
 
-def calcborkenACL(hostname):
+def calc_BrokenACL(hostname):
     try:
-        score = int(not borkenACL(hostname))
+        score = int(not brokenACL(hostname))
     except:
         score = ""
     return str(score)
 
-def calcSQLInjection(hostname):
+def calc_SQLInjection(hostname):
     try:
         score = int(not SQLInjection(hostname))
     except:
         score = ""
     return str(score)
 
-def calcArecordRedirection(hostname):
+def calc_A_RecordRedirection(hostname):
     try:
         score = int(not ArecordRedirection(hostname))
     except:
         score = ""
     return str(score)
 
-def calccors(hostname):
+def calc_CORS(hostname):
     try:
         d=cors(hostname)
         if d == '':
@@ -153,7 +153,7 @@ def calccors(hostname):
         score = ""    
     return str(score)
 
-def calcSessionhijack(hostname):
+def calc_SessionHijack(hostname):
     try:
         d= blindjacking(hostname)
         if d == "":
@@ -253,7 +253,7 @@ def SQLInjection(hostname):
         print("asd")
     return sqlnjection
 
-def borkenACL(hostname):
+def brokenACL(hostname):
     try:
         status=[]
         arr=[]
@@ -290,12 +290,12 @@ def borkenACL(hostname):
                     status.append("")
             f=f.replace(f[:f.find("/")],'')
     except Exception as e:
-        print("------------/nborkenACL--------"+str(e))
+        print("------------/nbrokenACL--------"+str(e))
         status.append("")
     driver.close()
     driver.quit()
-    borkenACL = ("True" in status)
-    return borkenACL
+    brokenACL = ("True" in status)
+    return brokenACL
 
 def ArecordRedirection(hostname):
     try:
@@ -321,7 +321,7 @@ def blindjacking(hostname):
         d=""
     return d
 
-def checkcaptcha(hostname):
+def checkCaptcha(hostname):
     try:
         try:
             r = requests.head(http_var+hostname, allow_redirects=True)
@@ -329,10 +329,10 @@ def checkcaptcha(hostname):
             r = requests.head(https_var+hostname, allow_redirects=True)
             
         d=os.popen("curl -s "+r.url+" |grep alt=").read()
-        checkcaptcha = ("captcha" in d)
+        checkCaptcha = ("captcha" in d)
     except:
-        checkcaptcha=False
-    return checkcaptcha
+        checkCaptcha=False
+    return checkCaptcha
 
 
         
