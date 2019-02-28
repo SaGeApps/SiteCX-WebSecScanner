@@ -9,6 +9,14 @@ import os
 import json
 from dependency.ssltest import sslcheck
 
+def calc_portScan(hostname):
+    d = portScan(hostname)
+    score = 10 - len(d)
+    return score
+
+def calc_OSdetection(hostname):
+    d = OSdetection(hostname)
+    return d
 
 def portScan(hostname):
     d=os.popen("nmap -p 1-65535 "+hostname+"| grep open").read()
@@ -22,6 +30,8 @@ def OSdetection(hostname):
 def dnsspoof(hostname):
     d=os.popen("dnsspoof -i eth0 -f "+hostname).read()
     return d
+
+
 def EmailHijacking(hostname):
     a=os.getcwd()
     os.chdir(a+"/dependency/spoofcheck")
@@ -46,6 +56,8 @@ def MITM(hostname):
         tscore = 0
     score = sscore + tscore + dscore
     return score
+
+
     
         
         
