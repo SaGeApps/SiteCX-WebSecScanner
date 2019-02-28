@@ -87,7 +87,7 @@ def Main(hostname):
         json_data = {}
         json_data["domain"]=hostname
         json_data["SQLInjection"]=calc_SQLInjection(hostname)
-        json_data["xmas"]=calcXmas(hostname)
+        json_data["xmas"]=calc_Xmas(hostname)
         json_data["Bad_authentication"]=calc_Authentication(hostname)
         json_data["brokenACL"]=calc_BrokenACL(hostname)
         json_data["cors"]=calc_CORS(hostname)
@@ -102,7 +102,7 @@ def Main(hostname):
     return json_data
 
 
-def calcXmas(hostname):
+def calc_Xmas(hostname):
     try:
         d=xmas(hostname)
         score=10 - len(d)
