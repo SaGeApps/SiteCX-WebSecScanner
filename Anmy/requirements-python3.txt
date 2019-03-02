@@ -1,0 +1,4 @@
+colorama==0.3.9
+emailprotectionslib==0.8.3
+dnslib==0.9.7
+tldextract==2.2.0
