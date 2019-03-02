@@ -55,7 +55,8 @@ WORKDIR SiteCX-WebSecScanner/
 RUN git checkout feature/Neena_CodeUpdations
 RUN git pull
 WORKDIR Neena/
-RUN pip3 install -r requirements.txt 
+RUN pip install -r requirements-python2.txt
+RUN pip3 install -r requirements-python2.txt
 RUN PATH=$PATH":/SiteCX-WebSecScanner/Neena"
 ### RUN echo $PATH
 #CMD ["git pull"]
