@@ -16,7 +16,11 @@ def calc_portScan(hostname):
 
 def calc_OSdetection(hostname):
     d = OSdetection(hostname)
+    d =0 
     return d
+
+def  calc_EmailHijacking(hostname):
+    
 
 def portScan(hostname):
     d=os.popen("nmap -p 1-65535 "+hostname+"| grep open").read()
@@ -35,7 +39,7 @@ def dnsspoof(hostname):
 def EmailHijacking(hostname):
     a=os.getcwd()
     os.chdir(a+"/dependency/spoofcheck")
-    d=os.popen("./spoofcheck.py "+hostname)
+    d=os.popen("./spoofcheck.py "+hostname).read()
     os.chdir("../..")
     return d
 def MITM(hostname):  
