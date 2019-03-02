@@ -20,6 +20,9 @@ def calc_OSdetection(hostname):
     return d
 
 def  calc_EmailHijacking(hostname):
+    d=EmailHijacking(hostname)
+    
+    return 
     
 
 def portScan(hostname):
@@ -40,7 +43,7 @@ def EmailHijacking(hostname):
     a=os.getcwd()
     os.chdir(a+"/dependency/spoofcheck")
     d=os.popen("./spoofcheck.py "+hostname).read()
-    os.chdir("../..")
+    os.chdir(a)
     return d
 def MITM(hostname):  
     d = sslcheck.TLS(hostname)    
