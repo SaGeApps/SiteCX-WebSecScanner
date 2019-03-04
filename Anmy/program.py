@@ -62,8 +62,12 @@ def calc_OSdetection(hostname):
 
 def calc_EmailHijacking(hostname):
     d=EmailHijacking(hostname)
-    return d
-    return 
+    if d == True:
+        score = 1
+    else:
+        score = 0
+    return score
+
 def  calc_spoof(hostname):
     d=dnsspoof(hostname)
     if d == "":
@@ -91,7 +95,9 @@ def dnsspoof(hostname):
 def EmailHijacking(hostname):
     a=os.getcwd()
     os.chdir(a+"/dependency/spoofcheck")
-    d=os.popen("./spoofcheck.py "+hostname).read()
+    d=os.popen("python2 spoofcheck.py "+hostname).read()
+    d=d.replace("[*","").replace("[-","").replace("\n","").split("]")
+    d = ('Spoofing not possible' in d[-1])
     os.chdir(a)
     return d
 def MITM(hostname):  
