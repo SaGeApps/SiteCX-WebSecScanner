@@ -60,7 +60,7 @@ def calc_OSdetection(hostname):
     d =0 
     return d
 
-def  calc_EmailHijacking(hostname):
+def calc_EmailHijacking(hostname):
     d=EmailHijacking(hostname)
     return d
     return 
@@ -113,6 +113,8 @@ def MITM(hostname):
     score = sscore + tscore + dscore
     return score
 
+if __name__ == "__main__":
+    app.run(host='localhost',port=7555)
 
     
         
