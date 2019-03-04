@@ -21,15 +21,13 @@ CORS(app)
 def index(hostname):
     data=Main(hostname)
     dm = data["domain"]
-    sq = data["SQLInjection"]
-    x = data["xmas"]
-    acl = data["brokenACL"]
-    ar = data["ArecordRedirection"]
-    c = data["cors"]
-    bad = data["Bad_authentication"]
-    session = data["Sessionhijack"]
+    mitm_score = data["mitm_score"]
+    portscan_score = data["portscan_score"]
+    osscan_score = data["osscan_score"]
+    EmailHijacking_score = data["EmailHijacking_score"]
+    sniff_score = data["sniff_score"]
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
-    render = render_template('index.html',img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    render = render_template('index.html',img = encoded, Domain = dm, mitm_score = mitm_score ,portscan_score = portscan_score , osscan_score = osscan_score ,EmailHijacking_score = EmailHijacking_score ,sniff_score = sniff_score)
     pdf = pdfkit.from_string(render,False)
     
     response = make_response(pdf)
@@ -41,15 +39,11 @@ def Main(hostname):
     try:
         json_data = {}
         json_data["domain"]=hostname
-        json_data["SQLInjection"]=calc_SQLInjection(hostname)
-        json_data["xmas"]=calc_Xmas(hostname)
-        json_data["Bad_authentication"]=calc_Authentication(hostname)
-        json_data["brokenACL"]=calc_BrokenACL(hostname)
-        json_data["cors"]=calc_CORS(hostname)
-        json_data["Sessionhijack"]=calc_SessionHijack(hostname)
-        json_data["ArecordRedirection"]=calc_A_RecordRedirection(hostname)
-        
-        
+        json_data["mitm_score"]=MITM(hostname)
+        json_data["portscan_score"]=calc_portScan(hostname)
+        json_data["osscan_score"]=calc_OSdetection(hostname)
+        json_data["EmailHijacking_score"]=calc_EmailHijacking(hostname)
+        json_data["sniff_score"]=calc_spoof(hostname)
     except Exception as e:
         print(str(e)+"main")
         json_data = {}
