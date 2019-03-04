@@ -71,9 +71,9 @@ def calc_EmailHijacking(hostname):
 def  calc_spoof(hostname):
     d=dnsspoof(hostname)
     if d == "":
-        score = 0
-    else:
         score = 1
+    else:
+        score = 0
     return score 
 
 
