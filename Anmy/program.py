@@ -52,12 +52,12 @@ def Main(hostname):
 def calc_portScan(hostname):
     d = portScan(hostname)
     score = 10 - len(d)
-    return score
+    return str(score)
 
 def calc_OSdetection(hostname):
     d = OSdetection(hostname)
     d = 1
-    return d
+    return str(d)
 
 def calc_EmailHijacking(hostname):
     d=EmailHijacking(hostname)
@@ -65,7 +65,7 @@ def calc_EmailHijacking(hostname):
         score = 1
     else:
         score = 0
-    return score
+    return str(score)
 
 def  calc_spoof(hostname):
     d=dnsspoof(hostname)
@@ -73,7 +73,7 @@ def  calc_spoof(hostname):
         score = 1
     else:
         score = 0
-    return score 
+    return str(score)
 
 
 
@@ -116,7 +116,7 @@ def MITM(hostname):
         sscore = 0
         tscore = 0
     score = sscore + tscore + dscore
-    return score
+    return str(score)
 
 if __name__ == "__main__":
     app.run(host='localhost',port=7555)
