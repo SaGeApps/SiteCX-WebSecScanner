@@ -6,7 +6,6 @@ Created on Mon Jan 21 10:50:16 2019
 @author: Karan, Anmy
 """
 import os
-import json
 from dependency.ssltest import sslcheck
 from flask import Flask ,render_template , make_response
 from flask_cors import CORS
