@@ -57,7 +57,7 @@ def calc_portScan(hostname):
 
 def calc_OSdetection(hostname):
     d = OSdetection(hostname)
-    d =0 
+    d = 1
     return d
 
 def calc_EmailHijacking(hostname):
