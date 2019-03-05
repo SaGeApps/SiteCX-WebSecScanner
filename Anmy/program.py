@@ -125,7 +125,8 @@ def EmailHijacking(hostname):
     return d
 def MITM(hostname):  
     try:
-        d = sslcheck.TLS(hostname)    
+        d = sslcheck.TLS(hostname)
+        print("here")
         if d["SSLv3"] == 'False':
             tscore = 3
         else:
