@@ -103,6 +103,8 @@ def portScan(hostname):
 def OSdetection(hostname):
     try:
         d=os.popen("nmap "+hostname+" -A | grep -E '(ubuntu|win|linux|Mac)'").read()
+        print("os")
+
     except :
         d = ""
     return d
@@ -110,6 +112,7 @@ def OSdetection(hostname):
 def dnsspoof(hostname):
     try:
         d=os.popen("dnsspoof -i eth0 -f "+hostname).read()
+        print("spoof")
     except :
         d = ""
     return d
@@ -123,6 +126,7 @@ def EmailHijacking(hostname):
         d=d.replace("[*","").replace("[-","").replace("\n","").split("]")
         d = ('Spoofing not possible' in d[-1])
         os.chdir(a)
+        print("email")
     except :
         d = ""
     return d
