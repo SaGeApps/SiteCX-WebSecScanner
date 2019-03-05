@@ -50,72 +50,99 @@ def Main(hostname):
     return json_data
 
 def calc_portScan(hostname):
-    d = portScan(hostname)
-    score = 10 - len(d)
+    try:
+        d = portScan(hostname)
+        score = 10 - len(d)
+    except :
+        score = ""
     return str(score)
 
 def calc_OSdetection(hostname):
-    d = OSdetection(hostname)
-    d = 1
+    try:
+        d = OSdetection(hostname)
+        d = 1
+    except :
+        d = ""        
     return str(d)
 
 def calc_EmailHijacking(hostname):
-    d=EmailHijacking(hostname)
-    if d == True:
-        score = 1
-    else:
-        score = 0
+    try:
+        d=EmailHijacking(hostname)
+        if d == True:
+            score = 1
+        else:
+            score = 0
+    except :
+        score = ""
     return str(score)
 
 def  calc_spoof(hostname):
-    d=dnsspoof(hostname)
-    if d == "":
-        score = 1
-    else:
-        score = 0
+    try:
+        d=dnsspoof(hostname)
+        if d == "":
+            score = 1
+        else:
+            score = 0
+    except :
+        score = ""
     return str(score)
 
 
 
 def portScan(hostname):
-    d=os.popen("nmap -p 1-65535 "+hostname+"| grep open").read()
-    d= d[:-1].split("/n")
+    try:
+        d=os.popen("nmap -p 1-65535 "+hostname+"| grep open").read()
+        d= d[:-1].split("/n")
+    except :
+        d = ""
     return d
 
 def OSdetection(hostname):
-    d=os.popen("nmap "+hostname+" -A | grep -E '(ubuntu|win|linux|Mac)'").read()
+    try:
+        d=os.popen("nmap "+hostname+" -A | grep -E '(ubuntu|win|linux|Mac)'").read()
+    except :
+        d = ""
     return d
 
 def dnsspoof(hostname):
-    d=os.popen("dnsspoof -i eth0 -f "+hostname).read()
+    try:
+        d=os.popen("dnsspoof -i eth0 -f "+hostname).read()
+    except :
+        d = ""
     return d
 
 
 def EmailHijacking(hostname):
-    a=os.getcwd()
-    os.chdir(a+"/dependency/spoofcheck")
-    d=os.popen("python2 spoofcheck.py "+hostname).read()
-    d=d.replace("[*","").replace("[-","").replace("\n","").split("]")
-    d = ('Spoofing not possible' in d[-1])
-    os.chdir(a)
+    try:
+        a=os.getcwd()
+        os.chdir(a+"/dependency/spoofcheck")
+        d=os.popen("python2 spoofcheck.py "+hostname).read()
+        d=d.replace("[*","").replace("[-","").replace("\n","").split("]")
+        d = ('Spoofing not possible' in d[-1])
+        os.chdir(a)
+    except :
+        d = ""
     return d
 def MITM(hostname):  
-    d = sslcheck.TLS(hostname)    
-    if d["SSLv3"] == 'False':
-        tscore = 3
-    else:
-        tscore = 0
-    if sslcheck.isInsecureSignatureAlgorithm(hostname) == 'False':
-        sscore = 2
-    else:
-        sscore = 0
-    if int(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
-        dscore = 5
-    else:
-        dscore = 0
-        sscore = 0
-        tscore = 0
-    score = sscore + tscore + dscore
+    try:
+        d = sslcheck.TLS(hostname)    
+        if d["SSLv3"] == 'False':
+            tscore = 3
+        else:
+            tscore = 0
+        if sslcheck.isInsecureSignatureAlgorithm(hostname) == 'False':
+            sscore = 2
+        else:
+            sscore = 0
+        if int(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
+            dscore = 5
+        else:
+            dscore = 0
+            sscore = 0
+            tscore = 0
+        score = sscore + tscore + dscore
+    except :
+        score = ""
     return str(score)
 
 if __name__ == "__main__":
