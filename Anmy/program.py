@@ -42,7 +42,6 @@ def Main(hostname):
         json_data["portscan_score"]=calc_portScan(hostname)
         json_data["osscan_score"]=calc_OSdetection(hostname)
         json_data["EmailHijacking_score"]=calc_EmailHijacking(hostname)
-        json_data["mitm_score"]=MITM(hostname)
         json_data["sniff_score"]=calc_spoof(hostname)
     except Exception as e:
         print(str(e)+"main")
