@@ -38,6 +38,7 @@ def Main(hostname):
     try:
         json_data = {}
         json_data["domain"]=hostname
+        json_data["mitm_score"]=MITM(hostname)
         json_data["portscan_score"]=calc_portScan(hostname)
         json_data["osscan_score"]=calc_OSdetection(hostname)
         json_data["EmailHijacking_score"]=calc_EmailHijacking(hostname)
@@ -51,6 +52,7 @@ def Main(hostname):
 
 def calc_portScan(hostname):
     try:
+        print("port")
         d = portScan(hostname)
         score = 10 - len(d)
     except :
@@ -91,6 +93,7 @@ def  calc_spoof(hostname):
 
 def portScan(hostname):
     try:
+        print("port1")
         d=os.popen("nmap -p 1-65535 "+hostname+"| grep open").read()
         d= d[:-1].split("/n")
     except :
