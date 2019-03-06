@@ -27,12 +27,13 @@ def index(hostname):
     sniff_score = data["sniff_score"]
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
     render = render_template('index.html',img = encoded, Domain = dm, mitm_score = mitm_score ,portscan_score = portscan_score , osscan_score = osscan_score ,EmailHijacking_score = EmailHijacking_score ,sniff_score = sniff_score)
-    pdf = pdfkit.from_string(render,False)
+   # pdf = pdfkit.from_string(render,False)
     
-    response = make_response(pdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'inline; filename =output.pdf'
-    return response
+    #response = make_response(pdf)
+    #response.headers['Content-Type'] = 'application/pdf'
+    #response.headers['Content-Disposition'] = 'inline; filename =output.pdf'
+    #return response
+    return render
 
 def Main(hostname):
     try:
