@@ -30,6 +30,7 @@ RUN pip install -r requirements-python2.txt
 ###CMD [Xvfb :0 && export DISPLAY=:0]
 EXPOSE 7555
 #ENTRYPOINT [ "python3" ]
+RUN which xvfb-run
 RUN which python3
 RUN apt-get install -y libfontconfig1
-#CMD [ xvfb-run python3 program.py ]
+CMD xvfb-run python3 program.py
