@@ -73,7 +73,7 @@ def index(hostname):
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
-    render = render_template('index.html',img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    render = render_template('index.html',assetPath = os.getcwd(), img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
     pdf = pdfkit.from_string(render,False)
     
     response = make_response(pdf)
