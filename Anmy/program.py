@@ -94,7 +94,7 @@ def portScan(hostname):
     try:
         print("port1")
         d=os.popen("nmap –sX –p-  -Pn "+hostname+"| grep open").read()
-        d= d[:-1].split("/n")
+        d= d[:-1].split("\n")
     except :
         d = ""
     return d
