@@ -148,7 +148,7 @@ def MITM(hostname):
         score = sscore + tscore + dscore
         print("here2")
     except Exception as e:
-        print(str(e)+"======================")
+        print(str(e)+"g======================")
         score = "none"
     return str(score)
 
