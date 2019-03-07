@@ -52,7 +52,6 @@ def Main(hostname):
 
 def calc_portScan(hostname):
     try:
-        print("port")
         d = portScan(hostname)
         score = 10 - len(d)
     except :
@@ -93,7 +92,6 @@ def  calc_spoof(hostname):
 
 def portScan(hostname):
     try:
-        print("port1")
         d=os.popen("nmap –sX –p-  -Pn "+hostname+"| grep open").read()
         d= d[:-1].split("\n")
     except :
@@ -103,7 +101,6 @@ def portScan(hostname):
 def OSdetection(hostname):
     try:
         d=os.popen("nmap "+hostname+" -A | grep -E '(ubuntu|win|linux|Mac)'").read()
-        print("os")
 
     except :
         d = ""
@@ -112,7 +109,6 @@ def OSdetection(hostname):
 def dnsspoof(hostname):
     try:
         d=os.popen("dnsspoof -i eth0 -f "+hostname).read()
-        print("spoof")
     except :
         d = ""
     return d
@@ -126,14 +122,13 @@ def EmailHijacking(hostname):
         d=d.replace("[*","").replace("[-","").replace("\n","").split("]")
         d = ('Spoofing not possible' in d[-1])
         os.chdir(a)
-        print("email")
     except :
         d = ""
     return d
 def MITM(hostname):  
     try:
         d = sslcheck.TLS(hostname)
-        print("here")
+        print("here1")
         if d["SSLv3"] == 'False':
             tscore = 3
         else:
@@ -149,6 +144,7 @@ def MITM(hostname):
             sscore = 0
             tscore = 0
         score = sscore + tscore + dscore
+        print("here2")
     except :
         score = ""
     return str(score)
