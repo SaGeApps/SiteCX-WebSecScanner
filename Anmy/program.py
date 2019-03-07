@@ -123,6 +123,7 @@ def EmailHijacking(hostname):
         d = ('Spoofing not possible' in d[-1])
         os.chdir(a)
     except :
+        os.chdir(a)
         d = ""
     return d
 def MITM(hostname):  
