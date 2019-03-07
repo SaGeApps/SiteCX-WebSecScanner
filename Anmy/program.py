@@ -133,14 +133,17 @@ def MITM(hostname):
         print("here1")
         if d["SSLv3"] == 'False':
             tscore = 3
+            print("here2")
         else:
             tscore = 0
         if sslcheck.isInsecureSignatureAlgorithm(hostname) == 'False':
             sscore = 2
+            print("here3")
         else:
             sscore = 0
         if int(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
             dscore = 5
+            print("here4")
         else:
             dscore = 0
             sscore = 0
@@ -148,7 +151,7 @@ def MITM(hostname):
         score = sscore + tscore + dscore
         print("here2")
     except Exception as e:
-        print(str(e))
+        print(str(e)+"======================")
         score = "none"
     return str(score)
 
