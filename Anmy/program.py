@@ -32,6 +32,7 @@ def index(hostname):
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'inline; filename =output.pdf'
+    print(data)
     return response
     #return render
 
@@ -146,7 +147,8 @@ def MITM(hostname):
             tscore = 0
         score = sscore + tscore + dscore
         print("here2")
-    except :
+    except Exception as e:
+        print(str(e))
         score = ""
     return str(score)
 
