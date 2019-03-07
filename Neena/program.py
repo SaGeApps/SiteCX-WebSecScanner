@@ -74,7 +74,7 @@ def index(hostname):
     session = data["Sessionhijack"]
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
     render = render_template('index.html',assetPath = os.getcwd(), img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
-    options = {
+    '''options = {
     'load-error-handling': 'ignore',
     'load-media-error-handling': 'ignore',
     'orientation': 'landscape',
@@ -90,8 +90,8 @@ def index(hostname):
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'inline; filename =output.pdf'
-
-    return response
+    '''
+    return render
 
 
 def Main(hostname):
