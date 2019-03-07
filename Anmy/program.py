@@ -149,7 +149,7 @@ def MITM(hostname):
         print("here2")
     except Exception as e:
         print(str(e))
-        score = ""
+        score = "none"
     return str(score)
 
 if __name__ == "__main__":
