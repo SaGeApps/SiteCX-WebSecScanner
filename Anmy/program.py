@@ -130,20 +130,17 @@ def EmailHijacking(hostname):
 def MITM(hostname):  
     try:
         d = sslcheck.TLS(hostname)
-        print("here1")
         if d["SSLv3"] == 'False':
             tscore = 3
-            print("here2")
         else:
             tscore = 0
         if sslcheck.isInsecureSignatureAlgorithm(hostname) == 'False':
             sscore = 2
-            print("here3")
         else:
             sscore = 0
+        print(sslcheck.DaysLeft(sslcheck.Date(hostname)))
         if float(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
             dscore = 5
-            print("here4")
         else:
             dscore = 0
             sscore = 0
