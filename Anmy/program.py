@@ -141,7 +141,7 @@ def MITM(hostname):
             print("here3")
         else:
             sscore = 0
-        if int(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
+        if float(sslcheck.DaysLeft(sslcheck.Date(hostname))) > 0:
             dscore = 5
             print("here4")
         else:
