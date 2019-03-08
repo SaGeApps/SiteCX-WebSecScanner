@@ -74,7 +74,7 @@ def index(hostname):
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
     xss = data["XSS"]
-    render = render_template('index.html',path = os.getcwd(),xss = xss, img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    render = render_template('index.html',path = os.getcwd(),xss = xss, img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , acl = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
     '''options = {
     'load-error-handling': 'ignore',
     'load-media-error-handling': 'ignore',
