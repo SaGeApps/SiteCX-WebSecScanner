@@ -72,8 +72,9 @@ def index(hostname):
     c = data["cors"]
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
+    xss = data["XSS"]
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
-    render = render_template('index.html',path = os.getcwd(), img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
+    render = render_template('index.html',path = os.getcwd(),xss = xss, img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
     '''options = {
     'load-error-handling': 'ignore',
     'load-media-error-handling': 'ignore',
@@ -105,7 +106,7 @@ def Main(hostname):
         json_data["cors"]=calc_CORS(hostname)
         json_data["Sessionhijack"]=calc_SessionHijack(hostname)
         json_data["ArecordRedirection"]=calc_A_RecordRedirection(hostname)
-        
+        json_data["XSS"]=calc_xss(hostname)
         
     except Exception as e:
         print(str(e)+"main")
@@ -113,7 +114,17 @@ def Main(hostname):
         json_data["domain"]=hostname
     return json_data
 
-
+def calc_xss(hostname):
+    if XSSProtection(hostname) == True:
+        xssp = 3
+    else :
+        xssp = 0
+    if xsspy(hostname) == True:
+        xss = 7
+    else:
+        xss = 0
+    score = xssp + xss
+    return score
 def calc_Xmas(hostname):
     try:
         d=xmas(hostname)
@@ -215,16 +226,6 @@ def XContentTypeOptions(hostname):
         print(str(e)+"XContentTypeOptions")
         XContentTypeOptions=False
     return XContentTypeOptions
-
-def xsspy(hostname):
-    try:
-        a=os.getcwd()
-        os.chdir(a+"/dependency/XssPy")
-        d=os.popen("python2 XssPy.py "+hostname).read()
-    except Exception as e:
-        print(str(e)+"XContentTypeOptions")
-        xsspy=''
-    return xsspy
     
 def cors(hostname):
     try:
@@ -346,8 +347,18 @@ def checkCaptcha(hostname):
         checkCaptcha=False
     return checkCaptcha
 
-
-        
+def xsspy(hostname):
+    try:
+        a=os.getcwd()
+        os.chdir(a+"/dependency/XssPy/")
+        d=os.popen("python XssPy.py -u "+hostname).read()
+        d=d.remove("\n","").split("Started finging XSS")
+        d= (d == "")
+        os.chdir(a)
+    except:
+        d = False
+        os.chdir(a)
+    return d
 
 if __name__ == "__main__":
     app.run(host='localhost',port=7444)
