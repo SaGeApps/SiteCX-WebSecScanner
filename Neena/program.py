@@ -327,10 +327,10 @@ def blindjacking(hostname):
         os.chdir(a+"/dependency/findject/")
         d=os.popen("tshark -i  eth0 -F pcap -w test.pcap").read()
         d=os.popen("python findject.py test.pcap").read()
-        os.chdir(predir)
+        os.chdir(a)
     except Exception as e:
         print(str(e)+"blindjacking")
-        os.chdir(predir)
+        os.chdir(a)
         d=""
     return d
 
