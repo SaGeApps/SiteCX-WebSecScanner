@@ -63,6 +63,7 @@ def get_image_file_as_base64_data():
     
 @app.route('/<hostname>', methods=['GET'])  
 def index(hostname):
+    encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
     data=Main(hostname)
     dm = data["domain"]
     sq = data["SQLInjection"]
@@ -73,7 +74,6 @@ def index(hostname):
     bad = data["Bad_authentication"]
     session = data["Sessionhijack"]
     xss = data["XSS"]
-    encoded = base64.b64encode(open("static/logo_s.png", "rb").read()).decode('utf-8')
     render = render_template('index.html',path = os.getcwd(),xss = xss, img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , brokenACL = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
     '''options = {
     'load-error-handling': 'ignore',
