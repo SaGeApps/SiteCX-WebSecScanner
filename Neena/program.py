@@ -353,7 +353,7 @@ def xsspy(hostname):
         os.chdir(a+"/dependency/XssPy/")
         d=os.popen("python XssPy.py -u "+hostname).read()
         d=d.remove("\n","").split("Started finging XSS")
-        d= (d == "")
+        d= (d == "") or ("No link found, exiting" in d)
         os.chdir(a)
     except:
         d = False
