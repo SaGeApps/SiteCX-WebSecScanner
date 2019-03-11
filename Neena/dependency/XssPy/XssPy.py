@@ -34,23 +34,7 @@ class color:
 
 
 print color.BOLD + color.RED + """
-XssPy - Finding XSS made easier
-Author: Faizan Ahmad (Fsecurify)
-Email: fsecurify@gmail.com
-Usage: XssPy.py website.com (Not www.website.com OR http://www.website.com)
-Comprehensive Scan: python XssPy.py -u website.com -e
-Verbose logging: python XssPy.py -u website.com -v
-Cookies: python XssPy.py -u website.complex -c name=val name=val
-
-Description: XssPy is a python tool for finding Cross Site Scripting
-vulnerabilities in websites. This tool is the first of its kind.
-Instead of just checking one page as most of the tools do, this tool
-traverses the website and find all the links and subdomains first.
-After that, it starts scanning each and every input on each and every
- page that it found while its traversal. It uses small yet effective
-payloads to search for XSS vulnerabilities. XSS in many high
-profile websites and educational institutes has been found
-by using this very tool.
+Started
 """ + color.END
 
 logger = logging.getLogger(__name__)
