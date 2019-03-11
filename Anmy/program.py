@@ -93,7 +93,7 @@ def  calc_spoof(hostname):
 
 def portScan(hostname):
     try:
-        d=os.popen("nmap –sX –p-  -Pn "+hostname+"| grep open").read()
+        d=os.popen("nmap "+hostname+"| grep open").read()
         d= d[:-1].split("\n")
     except :
         d = ""
