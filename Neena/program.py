@@ -262,12 +262,14 @@ def cors(hostname):
 
 def SQLInjection(hostname):
     try:
-        d=os.popen('python2 ./dependency/DTECT1/d-tect.py '+hostname+' |grep "Click Jacking"').read()
-        sqlnjection= ("Click Jacking" in d )
+        if findlogin(hostname) == True :
+            d=os.popen('python2 ./dependency/DTECT1/d-tect.py '+hostname+' |grep "Click Jacking"').read()
+            sqlnjection= ("Click Jacking" in d )
+        else:
+            sqlnjection=False
     except Exception as e:
         print(str(e)+"sqlnjection")
         sqlnjection=False
-        print("asd")
     return sqlnjection
 
 def brokenACL(hostname):
@@ -362,6 +364,14 @@ def xsspy(hostname):
         d = False
         os.chdir(a)
     return d
+def findlogin(hostname):
+    d = os.popen("curl "+hostname+" | grep -E "+"'"+'(type="password"|placeholder="Password"|name="password")'+"'").read()
+    if 'type="password"' in d or 'placeholder="Password"' in d or 'name="password"' in d:
+        d = True
+    else:
+        d = False
+    return d
+
 
 if __name__ == "__main__":
     app.run(host='localhost',port=7444)
