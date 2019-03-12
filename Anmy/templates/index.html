@@ -20,6 +20,15 @@ The statistics for your most recent domain scan for the domain <b>{{Domain}}</b>
 Max Score: 10 </br>
 Recommended Score: 8</br>
 Domain Score: {{mitm_score}}</br>
+{% if mitm_score == 10 %}
+<div><font color="green">Result:Not Vulnerable</font></div>
+{% elif mitm_score >= 8 %}
+<div><font color="orange">Result: Waring</font></div>
+{% elif mitm_score >= 7 %}
+<div><font color="orange">Result: Waring</font></div>
+{% else  %}
+<div><font color="orange">Result: Vulnerable</font></div>
+{% endif %}
 </br>
 </br>
 
@@ -78,7 +87,7 @@ Domain Score: {{EmailHijacking_score}}</br>
 {% endif %}
 </br>
 
-</br>
+
 
 
 Regards,</br>

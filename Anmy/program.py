@@ -153,7 +153,7 @@ def MITM(hostname):
     except Exception as e:
         print(str(e)+"g======================")
         score = 0
-    return str(score)
+    return score
 
 if __name__ == "__main__":
     app.run(host='localhost',port=7555)
