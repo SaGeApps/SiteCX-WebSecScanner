@@ -113,6 +113,11 @@
 </div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
 <p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if sqlinjection == "1" %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
 </div>
 </div>
 </div>
@@ -133,6 +138,11 @@
 <div class="text-white font-14 font-weight-semibold mb-0">{{xss}}</div>
 </div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if xss >= 7 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
 </div>
 </div>
 </div><div class="col-md-6 col-xl-3 px-xl-2">
@@ -152,7 +162,15 @@
 <div class="text-white font-14 font-weight-semibold mb-0">{{cors}}</div>
 </div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-<p class="text-white font-14 font-weight-semibold mb-0">Result</p></div>
+<p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if cors >= 7 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% elif cors >= 5 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="orange">Warning</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %} 
+</div>
 </div>
 </div>
 <div class="col-md-6 col-xl-3 px-xl-2">
@@ -169,8 +187,16 @@
 </div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Domain Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">{{xmas}}</div>
+<div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if xmas >= 8 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% elif xmas >= 6 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="orange">Warning</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
+</div> 
 </div>
-<div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p></div>
 </div>
 </div>
 </div></div>
@@ -203,23 +229,50 @@
 </div></div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Domain Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">{{acl}}</div>
-<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p><div class="status success"></div></div></div></div><div class="col-md-6 col-xl-3 px-xl-2"><div class="check-panel-block bg-dark-6 d-flex flex-wrap align-content-center p-4 mb-4 mb-xl-0"><div class="d-flex align-items-center justify-content-between w-100 mb-4"><p class="font-14 font-weight-semibold mr-1 mb-0">Bad Authentication</p>
+<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if acl == "1" %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
+<div class="status success"></div></div></div></div><div class="col-md-6 col-xl-3 px-xl-2"><div class="check-panel-block bg-dark-6 d-flex flex-wrap align-content-center p-4 mb-4 mb-xl-0"><div class="d-flex align-items-center justify-content-between w-100 mb-4"><p class="font-14 font-weight-semibold mr-1 mb-0">Bad Authentication</p>
 <div class="icon"><img src="file:///C:/static/dddd/img/freetools/icon-domainhealth-web-marketing.svg" alt=""></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1">
 <p class="text-white font-14 font-weight-semibold mb-0">Recommended Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">7</div>
 <div class="status danger"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Domain Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">{{Bad_authentication}}</div>
-<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p><div class="status success"></div></div></div></div><div class="col-md-6 col-xl-3 px-xl-2"><div class="check-panel-block bg-dark-6 d-flex flex-wrap align-content-center p-4 mb-4 mb-xl-0"><div class="d-flex align-items-center justify-content-between w-100 mb-4"><p class="font-14 font-weight-semibold mr-1 mb-0">Arecord Redirection</p>
+<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if Bad_authentication >= 7 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
+
+
+<div class="status success"></div></div></div></div><div class="col-md-6 col-xl-3 px-xl-2"><div class="check-panel-block bg-dark-6 d-flex flex-wrap align-content-center p-4 mb-4 mb-xl-0"><div class="d-flex align-items-center justify-content-between w-100 mb-4"><p class="font-14 font-weight-semibold mr-1 mb-0">Arecord Redirection</p>
 <div class="icon"><img src="file:///C:/static/dddd/img/freetools/icon-domainhealth-email-marketing.svg" alt=""></div></div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Recommended Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">1</div>
 <div class="status danger"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Domain Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">{{ArecordRedirection}}</div>
-<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p><div class="status success"></div></div></div></div><div class="col-md-6 col-xl-3 px-xl-2"><div class="check-panel-block bg-dark-6 d-flex flex-wrap align-content-center p-4 mb-4 mb-xl-0"><div class="d-flex align-items-center justify-content-between w-100 mb-4"><p class="font-14 font-weight-semibold mr-1 mb-0">Session Hijacking</p>
+<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if ArecordRedirection == "1" %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
+<div class="status success"></div></div></div></div><div class="col-md-6 col-xl-3 px-xl-2"><div class="check-panel-block bg-dark-6 d-flex flex-wrap align-content-center p-4 mb-4 mb-xl-0"><div class="d-flex align-items-center justify-content-between w-100 mb-4"><p class="font-14 font-weight-semibold mr-1 mb-0">Session Hijacking</p>
 <div class="icon"><img src="file:///C:/static/dddd/img/freetools/icon-domainhealth-virus-marketing.svg" alt=""></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Recommended Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">1</div><div class="status danger"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100 mb-1"><p class="text-white font-14 font-weight-semibold mb-0">Domain Score</p>
 <div class="text-white font-14 font-weight-semibold mb-0">{{Sessionhijack}}</div>
-<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p><div class="status success"></div></div></div></div></div></div>
+<div class="status warning"></div></div><div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
+{% if Sessionhijack == "1" %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% else %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+{% endif %}
+
+<div class="status success"></div></div></div></div></div></div>
         </div>
       </div></div></div>
   

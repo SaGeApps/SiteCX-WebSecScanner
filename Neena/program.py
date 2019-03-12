@@ -67,11 +67,11 @@ def index(hostname):
     data=Main(hostname)
     dm = data["domain"]
     sq = data["SQLInjection"]
-    x = data["xmas"]
+    x = int(data["xmas"])
     acl = data["brokenACL"]
     ar = data["ArecordRedirection"]
-    c = data["cors"]
-    bad = data["Bad_authentication"]
+    c = int(data["cors"])
+    bad = int(data["Bad_authentication"])
     session = data["Sessionhijack"]
     xss = data["XSS"]
     render = render_template('index.html',path = os.getcwd(),xss = xss, img = encoded, Domain = dm, sqlinjection = sq ,xmas = x , acl = acl ,ArecordRedirection = ar ,cors = c,Bad_authentication = bad,Sessionhijack = session)
@@ -129,8 +129,12 @@ def calc_Xmas(hostname):
     try:
         d=xmas(hostname)
         score=10 - len(d)
+        if score > 0:
+           pass
+        else:
+           score = 0
     except:
-        score = ""
+        score = 0
     return str(score)
     
 def calc_Authentication(hostname):
