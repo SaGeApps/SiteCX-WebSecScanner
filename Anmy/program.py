@@ -55,17 +55,21 @@ def calc_portScan(hostname):
     try:
         d = portScan(hostname)
         score = 10 - len(d)
+        if score > 0:
+            pass
+        else:
+            score = 0
     except :
-        score = ""
-    return str(score)
+        score = 0
+    return score
 
 def calc_OSdetection(hostname):
     try:
         d = OSdetection(hostname)
         d = 1
     except :
-        d = ""        
-    return str(d)
+        d = 0        
+    return  d
 
 def calc_EmailHijacking(hostname):
     try:
@@ -75,8 +79,8 @@ def calc_EmailHijacking(hostname):
         else:
             score = 0
     except :
-        score = ""
-    return str(score)
+        score = 0
+    return score
 
 def  calc_spoof(hostname):
     try:
@@ -86,8 +90,8 @@ def  calc_spoof(hostname):
         else:
             score = 0
     except :
-        score = ""
-    return str(score)
+        score = 0
+    return score
 
 
 
@@ -146,10 +150,9 @@ def MITM(hostname):
             sscore = 0
             tscore = 0
         score = sscore + tscore + dscore
-        print("here2")
     except Exception as e:
         print(str(e)+"g======================")
-        score = "none"
+        score = 0
     return str(score)
 
 if __name__ == "__main__":
