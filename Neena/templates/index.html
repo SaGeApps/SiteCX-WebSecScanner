@@ -138,8 +138,10 @@
 <div class="text-white font-14 font-weight-semibold mb-0">{{xss}}</div>
 </div>
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
-{% if xss >= 7 %}
+{% if xss == 7 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
+{% elif xss >= 7 %}
+<div class="text-white font-14 font-weight-semibold mb-0"><font color="orange">Warning</font></div>
 {% else %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
 {% endif %}
