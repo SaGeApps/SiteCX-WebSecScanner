@@ -16,6 +16,8 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
 
+
+
 @app.route('/<hostname>', methods=['GET'])  
 def index(hostname):
     data=Main(hostname)
@@ -35,7 +37,10 @@ def index(hostname):
     print(data)
     return response
     #return render
-
+@app.route('/find/<hostname>', methods=['GET']) 
+def compare(hostname):
+    data=Main(hostname)
+    return str(data).replace("\'", "\"")
 def Main(hostname):
     try:
         json_data = {}
