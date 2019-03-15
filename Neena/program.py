@@ -60,16 +60,24 @@ def get_image_file_as_base64_data():
     return encoded
     
 @app.route('/bad/')
-def bad():
+def badhtml():
     return render_template('bad.html')
 
 @app.route('/xss/')
-def xss():
+def xsshtml():
     return render_template('xss.html')
 
 @app.route('/corswarn/')
-def corswarn():
+def corswarnhtml():
     return render_template('corswarn.html')
+
+@app.route('/xmas/')
+def xmashtml():
+    return render_template('xmas.html')
+
+@app.route('/corsvul/')
+def corsvulhtml():
+    return render_template('corsvul.html')
 
     
 @app.route('/<hostname>', methods=['GET'])  

@@ -170,7 +170,7 @@
 {% elif cors >= 5 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('corswarn') }}><font color="orange">Warning</font></a></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('corsvul') }}><font color="red">vulnerable</font></a></div>
 {% endif %} 
 </div>
 </div>
@@ -192,10 +192,8 @@
 <div class="d-flex flex-wrap align-items-center justify-content-between w-100"><p class="text-white font-14 font-weight-semibold mb-0">Result</p>
 {% if xmas >= 8 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
-{% elif xmas >= 6 %}
-<div class="text-white font-14 font-weight-semibold mb-0"><font color="orange">Warning</font></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('xmas') }}><font color="red">vulnerable</font></a></div>
 {% endif %}
 </div> 
 </div>
