@@ -141,7 +141,7 @@
 {% if xss == 10 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% elif xss >= 7 %}
-<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('xss') }}><font color="orange">Warning</font></a></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('xsshtml') }}><font color="orange">Warning</font></a></div>
 {% else %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
 {% endif %}
@@ -168,9 +168,9 @@
 {% if cors >= 7 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% elif cors >= 5 %}
-<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('corswarn') }}><font color="orange">Warning</font></a></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('corswarnhtml') }}><font color="orange">Warning</font></a></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('corsvul') }}><font color="red">vulnerable</font></a></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('corsvulhtml') }}><font color="red">vulnerable</font></a></div>
 {% endif %} 
 </div>
 </div>
@@ -193,7 +193,7 @@
 {% if xmas >= 8 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('xmas') }}><font color="red">vulnerable</font></a></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('xmashtml') }}><font color="red">vulnerable</font></a></div>
 {% endif %}
 </div> 
 </div>
@@ -245,7 +245,7 @@
 {% if Bad_authentication >= 7 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('bad') }}><font color="red">vulnerable</font></a></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('badhtml') }}><font color="red">vulnerable</font></a></div>
 {% endif %}
 
 
