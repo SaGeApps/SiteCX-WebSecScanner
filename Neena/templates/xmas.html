@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('xmas.png');
+  min-height: 100%;
+  background-position:center;
+background-repeat:no-repeat;
+  background-size:cover; 
+}
+</style>
+<body bgcolor="#696969">
+<h1 style="font-size:60px;" align="center"><b>XMAS Scan</b></h1>
+
+<div class="bgimg w3-display-container w3-text-white">
+
+  <div class="w3-display-middle w3-jumbo">
+    <p></p>
+  </div>
+  <div class="w3-display-topleft w3-container w3-xlarge">
+ <p><button onclick="document.getElementById('About').style.display='block'" class="w3-button w3-black">About</button></p>
+    <p><button onclick="document.getElementById('Justification').style.display='block'" class="w3-button w3-black">Justiication</button></p>
+    <p><button onclick="document.getElementById('Suggested action').style.display='block'" class="w3-button w3-black">Suggested action</button></p>
+  </div>
+  <div class="w3-display-bottomleft w3-container w3-text-black">
+    <p class="w3-xlarge"></p>
+    <p class="w3-large"></p>
+    
+  </div>
+</div>
+<!-- About Modal -->
+<div id="About" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('About').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1></h1>
+    </div>
+    <div class="w3-container">
+      <p></p>
+      <form action="/action_page.php" target="_blank">
+<br>
+        <p>The Xmas attack sent packets with all IP / TCP / UDP (or other protocols) option sets. Different operating systems or router firmware (Linux / Cisco / Windows / Juniper...) will respond differently to those options. So, the response will likely tell the attacker what kind of router you have. When the attacker has identified the Operating Systems and the ports open, it can try to exploit known vulnerabilities in this specific system / application.</p>
+        <p>Typical Severity-->Low</p> 
+<p>This attack can be carried out with a network mapper or scanner, or via raw socket programming in a scripting language.</p>
+<p>Xmas attack takes place when someone sends Xmas-flagged packets to one or more ports on a computer.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Menu Modal -->
+<div id="Justification" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Justification').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Bad Authentication</h1>
+    </div>
+    <div class="w3-container">
+      <h5>Why warning?</h5>
+    </div>
+    <div class="w3-container w3-black">
+      <h1>1.TCP ports are open.</h1>
+ 
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="Suggested action" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('Suggested action').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Prevention</h1>
+    </div>
+    <div class="w3-container">
+      <p></p>
+      <form action="/action_page.php" target="_blank">
+        <p>1.Employ a robust network defensive posture that includes a managed IDS/IPS.</p>
+        <p>2.Hide opened and closed ports</p>
+        
+        <p></button></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
