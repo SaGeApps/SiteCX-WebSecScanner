@@ -247,7 +247,7 @@
 {% if Bad_authentication >= 7 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><a href="bad.html"><font color="red">vulnerable</font></a></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href={{ url_for('bad') }}><font color="red">vulnerable</font></a></div>
 {% endif %}
 
 

@@ -12,9 +12,8 @@ from selenium import webdriver
 import re
 import urllib.request
 import dns.resolver
-from flask import Flask ,render_template , make_response
+from flask import Flask ,render_template , make_response, url_for
 from flask_cors import CORS
-import pdfkit
 import base64
 
 app = Flask(__name__)
@@ -60,6 +59,18 @@ def get_image_file_as_base64_data():
     encoded = base64.b64encode(open("static/logo_s.png", "rb").read())
     return encoded
     
+@app.route('/bad/')
+def bad():
+    return render_template('bad.html')
+
+@app.route('/xss/')
+def xss():
+    return render_template('xss.html')
+
+@app.route('/corswarn/')
+def corswarn():
+    return render_template('corswarn.html')
+
     
 @app.route('/<hostname>', methods=['GET'])  
 def index(hostname):
