@@ -141,7 +141,7 @@
 {% if xss == 10 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% elif xss >= 7 %}
-<div class="text-white font-14 font-weight-semibold mb-0"><font color="orange">Warning</font></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href="xss.html"><font color="orange">Warning</font></a></div>
 {% else %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
 {% endif %}
@@ -168,7 +168,7 @@
 {% if cors >= 7 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% elif cors >= 5 %}
-<div class="text-white font-14 font-weight-semibold mb-0"><font color="orange">Warning</font></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href="corswarn.html"><font color="orange">Warning</font></a></div>
 {% else %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
 {% endif %} 
@@ -247,7 +247,7 @@
 {% if Bad_authentication >= 7 %}
 <div class="text-white font-14 font-weight-semibold mb-0"><font color="green">Not vulnerable</font></div>
 {% else %}
-<div class="text-white font-14 font-weight-semibold mb-0"><font color="red">vulnerable</font></div>
+<div class="text-white font-14 font-weight-semibold mb-0"><a href="bad.html"><font color="red">vulnerable</font></a></div>
 {% endif %}
 
 
