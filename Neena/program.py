@@ -67,17 +67,17 @@ def badhtml():
 def xsshtml():
     return render_template('xss.html')
 
-@app.route('/corswarn/')
-def corswarnhtml():
-    return render_template('corswarn.html')
+@app.route('/corsw/')
+def corsw():
+    return render_template('corsw.html')
 
 @app.route('/xmas/')
 def xmashtml():
     return render_template('xmas.html')
 
-@app.route('/corsvul/')
-def corsvulhtml():
-    return render_template('corsvul.html')
+@app.route('/corsv/')
+def corsv():
+    return render_template('corsv.html')
 
     
 @app.route('/<hostname>', methods=['GET'])  

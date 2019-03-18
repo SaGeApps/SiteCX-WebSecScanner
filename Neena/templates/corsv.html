@@ -13,16 +13,13 @@ body, html {height: 100%}
   min-height: 100%;
   background-position: center;
   background-size: cover;
-
-
 }
 </style>
 <body bgcolor="#696969">
 <h1 style="font-size:60px;" align="center"><b>Cross Origin Resource Sharing</b></h1>
-
 <div class="bgimg w3-display-container w3-text-white">
   <div class="w3-display-middle w3-jumbo">
-
+    <p></p>
   </div>
   <div class="w3-display-topleft w3-container w3-xlarge">
  <p><button onclick="document.getElementById('About').style.display='block'" class="w3-button w3-black">About</button></p>
@@ -45,9 +42,10 @@ body, html {height: 100%}
     <div class="w3-container">
       <p></p>
       <form action="/action_page.php" target="_blank">
+        <br>
         <p>Cross-origin resource sharing is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource was served.</p>
-        <p>To prevent websites from tampering with each other, web browsers implement a security measure known as the same-origin policy. The same-origin policy lets resources (such as JavaScript) interact with resources from the same domain, but not with resources from a different domain. This provides security for the user by preventing abuse, such as running a script that reads the password field on a secure website.</p>
- 
+        <p>Cross-origin resource sharing is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource was served.</p>
+
       </form>
     </div>
   </div>
@@ -58,14 +56,14 @@ body, html {height: 100%}
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
       <span onclick="document.getElementById('Justification').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1>CORS</h1>
+      <h1>XSS</h1>
     </div>
     <div class="w3-container">
       <h5>Why vulnerable?</h5>
     </div>
     <div class="w3-container w3-black">
       <h1>1.Origin Reflection</h1>
-<h1>2.Pre-domain Wildcard</h1>
+      <h1>2.Pre-domain Wildcard</h1>
     </div>
   </div>
 </div>
@@ -80,10 +78,9 @@ body, html {height: 100%}
     <div class="w3-container">
       <p></p>
       <form action="/action_page.php" target="_blank">
-        <p>1.Never Set Access-Control-Allow-Origin to *(Astrik)</p>
+        <p>1.Never SetÂ Access-Control-Allow-Origin to *(Astrik)</p>
         <p>2.Configure the Access-Control-Allow-Origin header to allow requests only from the domains that you trust. </p>
         <p>3.Not enable Access-Control-Allow-Origin</p>
-        <p></p>
         <p></button></p>
       </form>
     </div>
