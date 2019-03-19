@@ -114,6 +114,11 @@ def index(hostname):
     return render
 
 
+@app.route('/find/<hostname>', methods=['GET']) 
+def compare(hostname):
+    data=Main(hostname)
+    return str(data).replace("\'", "\"")
+
 def Main(hostname):
     try:
         json_data = {}
