@@ -90,6 +90,7 @@ def Main_kafka():
                         #run((d["id"],d["domain"]))
                 except:
                     pass
+                    print("json format not correct")
         else:
             print('Error occured: {0}'.format(msg.error().str()))
 
