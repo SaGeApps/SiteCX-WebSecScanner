@@ -11,12 +11,53 @@ from flask import Flask ,render_template , make_response
 from flask_cors import CORS
 import pdfkit
 import base64
+from confluent_kafka import Consumer
+import json
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
 
 
+def Main_kafka():
+    consumer = Consumer({
+    'bootstrap.servers': '192.168.100.80:9092',
+    'group.id': 'server_side_scanning',
+    'client.id': 'sslcheck',
+    'enable.auto.commit': True,
+    'auto.commit.interval.ms': 1000,
+    'session.timeout.ms': 6000,
+        'default.topic.config': {'auto.offset.reset': 'latest'}})
+    consumer.subscribe(['domaindetails'])
+    try:
+        while True:
+            msg = consumer.poll(0.1)
+            if msg is None:
+                continue
+            elif not msg.error():
+                try:
+                    print('Received message: {0}'.format(msg.value()))
+                    d=json.loads(msg.value())
+                    print (d)
+                    if d["featureConfig"]["webSecurity"] == True:
+                        print("true")
+                        Main(d["companyDomain"])
+                    else:
+                        pass
+                    #elif d["job"] == "single":
+                        #run((d["id"],d["domain"]))
+                except:
+                    pass
+        else:
+            print('Error occured: {0}'.format(msg.error().str()))
+
+    except KeyboardInterrupt:
+        pass
+
+    finally:
+        consumer.close()
+    return
 
 @app.route('/<hostname>', methods=['GET'])  
 def index(hostname):
@@ -43,6 +84,7 @@ def compare(hostname):
     return str(data).replace("\'", "\"")
 def Main(hostname):
     try:
+        print("---------started---------")
         json_data = {}
         json_data["domain"]=hostname
         json_data["mitm_score"]=MITM(hostname)
@@ -54,6 +96,7 @@ def Main(hostname):
         print(str(e)+"main")
         json_data = {}
         json_data["domain"]=hostname
+    print(json_data)
     return json_data
 
 def calc_portScan(hostname):
@@ -161,7 +204,8 @@ def MITM(hostname):
     return score
 
 if __name__ == "__main__":
-    app.run(host='localhost',port=7555)
+    Main_kafka()
+    #app.run(host='localhost',port=7555)
 
     
         
