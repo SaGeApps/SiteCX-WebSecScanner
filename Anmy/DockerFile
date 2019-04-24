@@ -20,4 +20,4 @@ RUN pip install -r requirements-python2.txt
 
 EXPOSE 7555
 
-CMD xvfb-run python3 program.py
+CMD xvfb-run python3 clientside.py
