@@ -102,11 +102,14 @@ def Main(hostname):
 def calc_portScan(hostname):
     try:
         d = portScan(hostname)
-        score = 10 - len(d)
-        if score > 0:
-            pass
+        if d == ['']:
+            score = ''
         else:
-            score = 0
+            score = 10 - len(d)
+            if score > 0:
+                pass
+            else:
+                score = 0
     except :
         score = 0
     return score
