@@ -63,4 +63,4 @@ RUN PATH=$PATH":/SiteCX-WebSecScanner/Neena"
 #CMD [Xvfb :99 && export DISPLAY=:99]
 EXPOSE 7444
 ENTRYPOINT [ "python3" ]
-CMD [ "server-side.py" ]
+CMD [ "serverside.py" ]
